@@ -24,25 +24,39 @@ export default function TextOverlay() {
       },
     });
 
-    if (titleRef.current && subtitleRef.current) {
-      // Set initial state - visible at top
-      gsap.set([titleRef.current, subtitleRef.current], {
+    if (titleRef.current) {
+      // Set initial state - hidden at top
+      gsap.set(titleRef.current, {
+        opacity: 0,
+        y: 80,
+        scale: 0.96,
+      });
+
+      // Animate in when scrolling starts
+      gsap.to(titleRef.current, {
         opacity: 1,
         y: 0,
         scale: 1,
+        scrollTrigger: {
+          trigger: '#scroll-container',
+          start: '5% top',
+          end: '10% top',
+          scrub: 1,
+        },
       });
 
-      // Animate out as user scrolls
-      tl.to(
-        [titleRef.current, subtitleRef.current],
-        {
-          opacity: 0,
-          y: -80,
-          scale: 0.98,
-          duration: 0.6,
+      // Animate out as user continues scrolling
+      gsap.to(titleRef.current, {
+        opacity: 0,
+        y: -80,
+        scale: 0.98,
+        scrollTrigger: {
+          trigger: '#scroll-container',
+          start: '15% top',
+          end: '20% top',
+          scrub: 1,
         },
-        0.75,
-      );
+      });
     }
 
     if (section1Ref.current) {
@@ -132,10 +146,10 @@ export default function TextOverlay() {
       {/* soft vignette background to make text more readable over 3D scene */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/70" />
 
-      <div className="absolute top-16  left-1/2 transform -translate-x-1/2 text-center px-4 z-20">
+      <div className="absolute top-16 left-1/2 transform -translate-x-1/2 text-center px-4 z-20">
         <h1
           ref={titleRef}
-          className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 mb-4 drop-shadow-xl"
+          className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 mb-4 drop-shadow-xl opacity-0"
           style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}
         >
           Happy Pongal
