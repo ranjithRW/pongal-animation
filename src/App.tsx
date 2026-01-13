@@ -11,19 +11,42 @@ function App() {
     const container = document.getElementById('scroll-container');
     const progressBar = document.getElementById('scroll-progress-bar');
 
-    ScrollTrigger.refresh();
+    // Wait for models to load, then initialize ScrollTrigger
+    const initScrollTrigger = () => {
+      if (container && progressBar) {
+        ScrollTrigger.create({
+          trigger: container,
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 1,
+          onUpdate: (self) => {
+            progressBar.style.width = `${self.progress * 100}%`;
+          },
+        });
 
-    if (container && progressBar) {
-      ScrollTrigger.create({
-        trigger: container,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 1,
-        onUpdate: (self) => {
-          progressBar.style.width = `${self.progress * 100}%`;
-        },
-      });
-    }
+        // Refresh after a short delay to ensure all elements are ready
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 200);
+      }
+    };
+
+    // Initialize immediately and also after a delay to catch late-loading models
+    initScrollTrigger();
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 500);
+
+    // Also refresh on window resize
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (
@@ -60,6 +83,26 @@ function App() {
 
       <section className="relative h-screen bg-gradient-to-b from-orange-600 via-red-700 to-slate-950 flex items-center justify-center overflow-hidden">
         <div className="pointer-events-none absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_top,_#ffd27a_0,_transparent_55%)]" />
+        
+        {/* GIF on the right side, styled to blend with background */}
+        <div className="absolute right-4 md:right-8 lg:right-12 top-1/2 transform -translate-y-1/2 w-1/4 md:w-1/5 lg:w-1/6 h-auto max-h-[70vh] flex items-center justify-center z-10">
+          <div className="relative w-full h-auto">
+            {/* Gradient overlay to blend with warm background */}
+            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-orange-950/20 to-red-950/30 pointer-events-none rounded-2xl" />
+            {/* Warm glow effect matching the section background */}
+            <div className="absolute inset-0 bg-gradient-radial from-orange-400/15 via-transparent to-transparent pointer-events-none rounded-2xl" />
+            <img
+              src="/pp.gif"
+              alt="Pongal celebration"
+              className="w-full h-auto object-contain rounded-2xl shadow-2xl relative z-10"
+              style={{
+                filter: 'drop-shadow(0 0 30px rgba(251, 146, 60, 0.3)) drop-shadow(0 0 60px rgba(239, 68, 68, 0.15)) brightness(1.1) contrast(1.05) saturate(1.15)',
+                mixBlendMode: 'normal',
+              }}
+            />
+          </div>
+        </div>
+
         <div className="relative text-center text-white p-8 max-w-2xl">
           <p className="mb-3 text-sm uppercase tracking-[0.3em] text-amber-200/80">
             Harvest of Happiness

@@ -25,31 +25,24 @@ export default function TextOverlay() {
     });
 
     if (titleRef.current && subtitleRef.current) {
-      tl.from(titleRef.current, {
-        opacity: 0,
-        y: 80,
-        scale: 0.96,
-        duration: 0.6,
-      })
-        .from(
-          subtitleRef.current,
-          {
-            opacity: 0,
-            y: 40,
-            duration: 0.5,
-          },
-          0.15,
-        )
-        .to(
-          [titleRef.current, subtitleRef.current],
-          {
-            opacity: 0,
-            y: -80,
-            scale: 0.98,
-            duration: 0.6,
-          },
-          0.75,
-        );
+      // Set initial state - visible at top
+      gsap.set([titleRef.current, subtitleRef.current], {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+      });
+
+      // Animate out as user scrolls
+      tl.to(
+        [titleRef.current, subtitleRef.current],
+        {
+          opacity: 0,
+          y: -80,
+          scale: 0.98,
+          duration: 0.6,
+        },
+        0.75,
+      );
     }
 
     if (section1Ref.current) {
@@ -139,7 +132,7 @@ export default function TextOverlay() {
       {/* soft vignette background to make text more readable over 3D scene */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/70" />
 
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center px-4">
+      <div className="absolute top-16  left-1/2 transform -translate-x-1/2 text-center px-4 z-20">
         <h1
           ref={titleRef}
           className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 mb-4 drop-shadow-xl"
@@ -147,13 +140,13 @@ export default function TextOverlay() {
         >
           Happy Pongal
         </h1>
-        <p
+        {/* <p
           ref={subtitleRef}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-lg md:text-2xl font-semibold text-white bg-white/10 backdrop-blur-md border border-white/20 shadow-xl"
           style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}
         >
           by randomwalk
-        </p>
+        </p> */}
       </div>
 
       <div

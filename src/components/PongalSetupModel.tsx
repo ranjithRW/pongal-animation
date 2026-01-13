@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import * as THREE from 'three';
@@ -14,11 +15,18 @@ export default function PongalSetupModel() {
     if (!groupRef.current) return;
 
     const group = groupRef.current;
+    const container = document.getElementById('scroll-container');
 
     // Start this model slightly to the right and behind
     group.position.set(4, 0, -4);
     group.rotation.set(0, -Math.PI / 4, 0);
+    group.scale.set(0.7, 0.7, 0.7);
     group.visible = true;
+
+    // Wait a bit for the scene to be ready, then refresh ScrollTrigger
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
 
     const tl = gsap.timeline({
       defaults: {
@@ -29,6 +37,7 @@ export default function PongalSetupModel() {
         start: '45% top',
         end: '95% bottom',
         scrub: 1,
+        invalidateOnRefresh: true,
       },
     });
 
@@ -45,11 +54,7 @@ export default function PongalSetupModel() {
         duration: 2,
         ease: 'power2.inOut',
       }, 0)
-      .fromTo(group.scale, {
-        x: 0.7,
-        y: 0.7,
-        z: 0.7,
-      }, {
+      .to(group.scale, {
         x: 1,
         y: 1,
         z: 1,
@@ -58,12 +63,27 @@ export default function PongalSetupModel() {
       }, 0);
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      clearTimeout(timer);
+      tl.kill();
+      const triggers = ScrollTrigger.getAll();
+      triggers.forEach(trigger => {
+        if (trigger.trigger === container || (trigger.vars && trigger.vars.trigger === '#scroll-container')) {
+          trigger.kill();
+        }
+      });
     };
-  }, []);
+  }, [scene]);
+
+  // Ensure updates happen in render loop
+  useFrame(() => {
+    if (groupRef.current) {
+      // Force update if needed
+      groupRef.current.updateMatrixWorld();
+    }
+  });
 
   return (
-    <group ref={groupRef} position={[0, 0, 0]} scale={1}>
+    <group ref={groupRef} position={[4, 0, -4]} rotation={[0, -Math.PI / 4, 0]} scale={0.7}>
       <primitive object={scene} />
     </group>
   );
