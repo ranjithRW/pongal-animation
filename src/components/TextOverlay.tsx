@@ -168,9 +168,9 @@ export default function TextOverlay() {
         className="absolute left-4 md:left-10 top-1/3 opacity-0"
       >
         <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50/90 backdrop-blur-md p-5 md:p-6 rounded-2xl shadow-2xl max-w-xs border border-orange-200/70">
-          <h3 className="text-xl md:text-2xl font-bold text-orange-700 mb-2">Tradition</h3>
+          <h3 className="text-xl md:text-2xl font-bold text-orange-700 mb-2">Welcome to RandomWalk</h3>
           <p className="text-gray-800 text-sm md:text-base">
-            Celebrating the harvest festival with joy, gratitude, and prosperity.
+            Innovating the future with cutting-edge technology and creative solutions.
           </p>
         </div>
       </div>
@@ -180,9 +180,9 @@ export default function TextOverlay() {
         className="absolute right-4 md:right-10 top-1/2 opacity-0"
       >
         <div className="bg-gradient-to-br from-rose-50 via-red-50 to-amber-50/90 backdrop-blur-md p-5 md:p-6 rounded-2xl shadow-2xl max-w-xs border border-rose-200/70">
-          <h3 className="text-xl md:text-2xl font-bold text-red-700 mb-2">Culture</h3>
+          <h3 className="text-xl md:text-2xl font-bold text-red-700 mb-2">Thank You</h3>
           <p className="text-gray-800 text-sm md:text-base">
-            Honoring nature, cattle, and the bounty that sustains our homes.
+            Thank you for being with us on this journey of innovation and excellence.
           </p>
         </div>
       </div>
