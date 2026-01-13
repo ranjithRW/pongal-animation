@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment, ContactShadows, PerspectiveCamera } from '@react-three/drei';
+import { Environment, ContactShadows, PerspectiveCamera } from '@react-three/drei';
 import { Suspense } from 'react';
 import PongalModel from './PongalModel';
 import PongalSetupModel from './PongalSetupModel';
@@ -21,6 +21,9 @@ export default function PongalScene() {
 
       <Canvas shadows dpr={[1, 2]}>
         <PerspectiveCamera makeDefault position={[0, 2, 8]} fov={50} />
+
+        {/* subtle atmospheric fog for more depth and realism */}
+        <fog attach="fog" args={['#020617', 6, 18]} />
 
         <ambientLight intensity={0.5} />
         <spotLight
@@ -55,20 +58,13 @@ export default function PongalScene() {
 
           <ContactShadows
             position={[0, -1.5, 0]}
-            opacity={0.5}
-            scale={10}
-            blur={2}
-            far={4}
+            opacity={0.65}
+            scale={12}
+            blur={2.4}
+            far={5}
           />
-          <Environment preset="sunset" />
+          <Environment preset="sunset" background blur={0.8} />
         </Suspense>
-
-        <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          minPolarAngle={Math.PI / 4}
-          maxPolarAngle={Math.PI / 2}
-        />
       </Canvas>
     </div>
   );
