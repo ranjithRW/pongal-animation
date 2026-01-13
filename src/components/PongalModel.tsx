@@ -15,75 +15,62 @@ export default function PongalModel() {
     if (!groupRef.current) return;
 
     const group = groupRef.current;
-    const container = document.getElementById('scroll-container');
 
     // Initialize model position
-    group.position.set(0, 0, 0);
-    group.rotation.set(0, 0, 0);
-    group.scale.set(1, 1, 1);
+    gsap.set(group.position, { x: 0, y: 0, z: 0 });
+    gsap.set(group.rotation, { x: 0, y: 0, z: 0 });
+    gsap.set(group.scale, { x: 1, y: 1, z: 1 });
     group.visible = true;
 
-    // Wait a bit for the scene to be ready, then refresh ScrollTrigger
+    // Wait for scene to be ready, then create animations
     const timer = setTimeout(() => {
       ScrollTrigger.refresh();
-    }, 100);
+    }, 300);
 
-    const tl = gsap.timeline({
-      defaults: {
-        ease: 'power3.inOut',
-      },
-      scrollTrigger: {
-        trigger: '#scroll-container',
-        start: 'top top',
-        end: '55% bottom',
-        scrub: 1,
-        invalidateOnRefresh: true,
+    // Create scroll-triggered animation
+    const scrollTrigger = ScrollTrigger.create({
+      trigger: '#scroll-container',
+      start: 'top top',
+      end: '55% bottom',
+      scrub: 1,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        
+        // Rotation animation
+        group.rotation.y = progress * Math.PI * 2;
+        
+        // Position animation
+        if (progress < 0.6) {
+          // First phase: move up and scale
+          group.position.y = progress * 1.5;
+          const scaleProgress = Math.min(progress / 0.6, 1);
+          const scale = 1 + (scaleProgress * 0.3);
+          group.scale.set(scale, scale, scale);
+          group.position.x = 0;
+          group.position.z = 0;
+        } else {
+          // Second phase: move away
+          const moveProgress = (progress - 0.6) / 0.4;
+          group.position.y = 1.5 - (moveProgress * 0.5);
+          group.position.x = -moveProgress * 3;
+          group.position.z = -moveProgress * 4;
+          const scale = 1.3 - (moveProgress * 0.3);
+          group.scale.set(scale, scale, scale);
+        }
       },
     });
 
-    // Animate the first model in the first part of scroll
-    tl.to(group.rotation, {
-      y: Math.PI * 2,
-      duration: 2.5,
-      ease: 'power2.inOut',
-    }, 0)
-      .to(group.position, {
-        y: 1.5,
-        duration: 1.5,
-        ease: 'power2.out',
-      }, 0)
-      .to(group.scale, {
-        x: 1.3,
-        y: 1.3,
-        z: 1.3,
-        duration: 1.5,
-        ease: 'power2.inOut',
-      }, 0.3)
-      // Move slightly away as the second model comes in
-      .to(group.position, {
-        x: -3,
-        z: -4,
-        duration: 2,
-        ease: 'power2.inOut',
-      }, 1.5);
-
     return () => {
       clearTimeout(timer);
-      tl.kill();
-      const triggers = ScrollTrigger.getAll();
-      triggers.forEach(trigger => {
-        if (trigger.trigger === container || (trigger.vars && trigger.vars.trigger === '#scroll-container')) {
-          trigger.kill();
-        }
-      });
+      scrollTrigger.kill();
     };
   }, [scene]);
 
   // Ensure updates happen in render loop
   useFrame(() => {
     if (groupRef.current) {
-      // Force update if needed
-      groupRef.current.updateMatrixWorld();
+      // Update matrix to ensure changes are reflected
+      groupRef.current.updateMatrixWorld(true);
     }
   });
 

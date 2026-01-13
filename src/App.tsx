@@ -24,18 +24,22 @@ function App() {
           },
         });
 
-        // Refresh after a short delay to ensure all elements are ready
+        // Refresh multiple times to ensure all models are loaded
         setTimeout(() => {
           ScrollTrigger.refresh();
         }, 200);
       }
     };
 
-    // Initialize immediately and also after a delay to catch late-loading models
+    // Initialize immediately
     initScrollTrigger();
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 500);
+    
+    // Refresh after delays to catch late-loading models
+    const timers = [
+      setTimeout(() => ScrollTrigger.refresh(), 500),
+      setTimeout(() => ScrollTrigger.refresh(), 1000),
+      setTimeout(() => ScrollTrigger.refresh(), 1500),
+    ];
 
     // Also refresh on window resize
     const handleResize = () => {
@@ -44,8 +48,13 @@ function App() {
     window.addEventListener('resize', handleResize);
 
     return () => {
-      clearTimeout(timer);
+      timers.forEach(timer => clearTimeout(timer));
       window.removeEventListener('resize', handleResize);
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars?.trigger === container || trigger.trigger === container) {
+          trigger.kill();
+        }
+      });
     };
   }, []);
 
