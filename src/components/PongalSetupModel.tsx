@@ -6,16 +6,18 @@ import * as THREE from 'three';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function PongalModel() {
+export default function PongalSetupModel() {
   const groupRef = useRef<THREE.Group>(null);
-  const { scene } = useGLTF('/pongal.glb.glb');
+  const { scene } = useGLTF('/psetup.glb');
 
   useEffect(() => {
     if (!groupRef.current) return;
 
     const group = groupRef.current;
 
-    group.position.set(0, 0, 0);
+    // Start this model slightly to the right and behind
+    group.position.set(4, 0, -4);
+    group.rotation.set(0, -Math.PI / 4, 0);
     group.visible = true;
 
     const tl = gsap.timeline({
@@ -24,37 +26,36 @@ export default function PongalModel() {
       },
       scrollTrigger: {
         trigger: '#scroll-container',
-        start: 'top top',
-        end: '55% bottom',
+        start: '45% top',
+        end: '95% bottom',
         scrub: 1,
       },
     });
 
-    // Animate the first model in the first part of scroll
-    tl.to(group.rotation, {
-      y: Math.PI * 2,
-      duration: 2.5,
+    // Bring in the setup model as the user scrolls down
+    tl.to(group.position, {
+      x: 0,
+      z: 0,
+      y: 0.5,
+      duration: 2,
       ease: 'power2.inOut',
     }, 0)
-      .to(group.position, {
-        y: 1.5,
-        duration: 1.5,
-        ease: 'power2.out',
-      }, 0)
-      .to(group.scale, {
-        x: 1.3,
-        y: 1.3,
-        z: 1.3,
-        duration: 1.5,
-        ease: 'power2.inOut',
-      }, 0.3)
-      // Move slightly away as the second model comes in
-      .to(group.position, {
-        x: -3,
-        z: -4,
+      .to(group.rotation, {
+        y: 0,
         duration: 2,
         ease: 'power2.inOut',
-      }, 1.5);
+      }, 0)
+      .fromTo(group.scale, {
+        x: 0.7,
+        y: 0.7,
+        z: 0.7,
+      }, {
+        x: 1,
+        y: 1,
+        z: 1,
+        duration: 2,
+        ease: 'power2.inOut',
+      }, 0);
 
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -68,4 +69,5 @@ export default function PongalModel() {
   );
 }
 
-useGLTF.preload('/pongal.glb.glb');
+useGLTF.preload('/psetup.glb');
+

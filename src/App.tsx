@@ -8,11 +8,33 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   useEffect(() => {
+    const container = document.getElementById('scroll-container');
+    const progressBar = document.getElementById('scroll-progress-bar');
+
     ScrollTrigger.refresh();
+
+    if (container && progressBar) {
+      ScrollTrigger.create({
+        trigger: container,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1,
+        onUpdate: (self) => {
+          progressBar.style.width = `${self.progress * 100}%`;
+        },
+      });
+    }
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative bg-slate-950 text-white">
+      {/* subtle top progress bar like Apple scroll stories */}
+      <div className="fixed top-0 left-0 w-full h-1.5 bg-white/5 z-40">
+        <div
+          id="scroll-progress-bar"
+          className="h-full w-0 bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 transition-[width] duration-150 ease-out"
+        />
+      </div>
       <div
         id="scroll-container"
         className="relative w-full"
@@ -36,15 +58,26 @@ function App() {
         </div>
       </div>
 
-      <div className="relative h-screen bg-gradient-to-b from-orange-600 to-red-700 flex items-center justify-center">
-        <div className="text-center text-white p-8">
-          <h2 className="text-5xl font-bold mb-4">May Your Life Be Filled</h2>
-          <p className="text-2xl mb-8">With Sweetness and Prosperity</p>
-          <div className="text-xl opacity-80">
-            Wishing you a joyous Pongal celebration!
+      <section className="relative h-screen bg-gradient-to-b from-orange-600 via-red-700 to-slate-950 flex items-center justify-center overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_top,_#ffd27a_0,_transparent_55%)]" />
+        <div className="relative text-center text-white p-8 max-w-2xl">
+          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-amber-200/80">
+            Harvest of Happiness
+          </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">
+            May Your Life Be Filled
+          </h2>
+          <p className="text-xl md:text-2xl mb-8 text-amber-50/90">
+            With sweetness, warmth, and endless prosperity.
+          </p>
+          <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-black/30 border border-white/20 shadow-xl backdrop-blur-md text-sm md:text-base">
+            <span className="inline-block h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-medium">
+              Wishing you a joyous Pongal celebration!
+            </span>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
