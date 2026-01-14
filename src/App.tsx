@@ -70,7 +70,7 @@ function App() {
       <div
         id="scroll-container"
         className="relative w-full"
-        style={{ height: '400vh' }}
+        style={{ height: '250vh' }}
       >
         <PongalScene />
         <TextOverlay />
@@ -94,7 +94,7 @@ function App() {
         <div className="pointer-events-none absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_top,_#ffd27a_0,_transparent_55%)]" />
         
         {/* GIF on the right side, styled to blend with background */}
-        <div className="absolute right-4 md:right-8 lg:right-12 top-1/2 transform -translate-y-1/2 w-1/4 md:w-1/5 lg:w-1/6 h-auto max-h-[70vh] flex items-center justify-center z-10">
+        <div className="absolute right-3 md:right-6 lg:right-8 top-1/2 transform -translate-y-1/2 w-1/5 md:w-1/6 lg:w-1/7 h-auto max-h-[50vh] flex items-center justify-center z-10">
           <div className="relative w-full h-auto">
             <img
               src="/Thai-Pongal.png"
@@ -108,17 +108,17 @@ function App() {
           </div>
         </div>
 
-        <div className="relative text-center text-white p-8 max-w-2xl">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-amber-200/80">
+        <div className="relative text-center text-white p-4 md:p-6 max-w-xl">
+          <p className="mb-2 text-xs md:text-sm uppercase tracking-[0.3em] text-amber-200/80">
             Harvest of Happiness
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-3 leading-tight">
             May Your Life Be Filled
           </h2>
-          <p className="text-xl md:text-2xl mb-8 text-amber-50/90">
+          <p className="text-base md:text-lg mb-6 text-amber-50/90">
             With sweetness, warmth, and endless prosperity.
           </p>
-          <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-black/30 border border-white/20 shadow-xl backdrop-blur-md text-sm md:text-base">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/30 border border-white/20 shadow-xl backdrop-blur-md text-xs md:text-sm">
             <span className="inline-block h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="font-medium">
               Wishing you a joyous Pongal celebration!

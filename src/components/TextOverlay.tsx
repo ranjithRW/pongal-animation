@@ -242,10 +242,10 @@ export default function TextOverlay() {
         }}
       />
 
-      <div className="absolute top-12 left-1/2 transform -translate-x-1/2 text-center px-4 z-20">
+      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 text-center px-4 z-20">
         <h1
           ref={titleRef}
-          className="text-5xl font-extrabold tracking-tight px-2 pt-2 pb-4 inline-block"
+          className="text-3xl md:text-4xl font-extrabold tracking-tight px-2 pt-2 pb-3 inline-block"
           style={{ 
             perspective: '1000px',
             transformStyle: 'preserve-3d',
@@ -274,12 +274,12 @@ export default function TextOverlay() {
         </h1>
       </div>
 
-      <div className="absolute top-4 md:top-6 right-4 md:right-6 z-20">
+      <div className="absolute top-3 md:top-4 right-3 md:right-4 z-20">
         <img
           ref={logoRef}
           src="/obito.png"
           alt="RandomWalk Logo"
-          className="h-16 md:h-20 lg:h-24 w-auto object-contain drop-shadow-2xl"
+          className="h-10 md:h-12 lg:h-14 w-auto object-contain drop-shadow-2xl"
           style={{
             filter: 'drop-shadow(0 0 20px rgba(251, 146, 60, 0.4))',
           }}
@@ -288,18 +288,18 @@ export default function TextOverlay() {
 
       <div
         ref={section1Ref}
-        className="absolute left-4 md:left-10 top-1/3 opacity-0"
+        className="absolute left-3 md:left-6 top-1/3 opacity-0"
       >
-        <div className="bg-gradient-to-br from-amber-100/95 via-orange-100/95 to-rose-100/95 backdrop-blur-xl p-6 md:p-7 rounded-3xl shadow-2xl max-w-sm border-2 border-orange-300/60 relative overflow-hidden"
+        <div className="bg-gradient-to-br from-amber-100/95 via-orange-100/95 to-rose-100/95 backdrop-blur-xl p-4 md:p-5 rounded-2xl shadow-2xl max-w-xs border-2 border-orange-300/60 relative overflow-hidden"
           style={{
             boxShadow: '0 20px 60px rgba(251, 146, 60, 0.3), inset 0 1px 0 rgba(255,255,255,0.5)',
           }}>
           <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none" />
           <div className="relative z-10">
-            <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-orange-600 to-rose-600 text-transparent bg-clip-text mb-3">
+            <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-orange-600 to-rose-600 text-transparent bg-clip-text mb-2">
               Greetings! 👋
             </h3>
-            <p className="text-gray-800 text-base md:text-lg leading-relaxed font-medium">
+            <p className="text-gray-800 text-sm md:text-base leading-relaxed font-medium">
               I'm <span className="font-bold text-orange-600">Obito Uchiha</span>, and I'm thrilled to share this special Pongal celebration with you!
             </p>
           </div>
@@ -308,18 +308,18 @@ export default function TextOverlay() {
 
       <div
         ref={section2Ref}
-        className="absolute right-4 md:right-10 top-1/2 opacity-0"
+        className="absolute right-3 md:right-6 top-1/2 opacity-0"
       >
-        <div className="bg-gradient-to-br from-rose-100/95 via-red-100/95 to-amber-100/95 backdrop-blur-xl p-6 md:p-7 rounded-3xl shadow-2xl max-w-sm border-2 border-rose-300/60 relative overflow-hidden"
+        <div className="bg-gradient-to-br from-rose-100/95 via-red-100/95 to-amber-100/95 backdrop-blur-xl p-4 md:p-5 rounded-2xl shadow-2xl max-w-xs border-2 border-rose-300/60 relative overflow-hidden"
           style={{
             boxShadow: '0 20px 60px rgba(244, 63, 94, 0.3), inset 0 1px 0 rgba(255,255,255,0.5)',
           }}>
           <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none" />
           <div className="relative z-10">
-            <h3 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-rose-600 to-red-600 text-transparent bg-clip-text mb-3">
+            <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-rose-600 to-red-600 text-transparent bg-clip-text mb-2">
               Gratitude 🙏
             </h3>
-            <p className="text-gray-800 text-base md:text-lg leading-relaxed font-medium">
+            <p className="text-gray-800 text-sm md:text-base leading-relaxed font-medium">
               Your presence makes this celebration even more meaningful. <span className="font-bold text-rose-600">Thank you</span> for being part of this joyous moment!
             </p>
           </div>
@@ -328,16 +328,16 @@ export default function TextOverlay() {
 
       <div
         ref={section3Ref}
-        className="absolute bottom-16 md:bottom-20 left-1/2 transform -translate-x-1/2 opacity-0"
+        className="absolute bottom-10 md:bottom-12 left-1/2 transform -translate-x-1/2 opacity-0"
       >
         <div 
-          className="bg-gradient-to-r from-orange-500 via-amber-500 to-red-500 px-6 py-3 md:px-8 md:py-4 rounded-2xl border-2 border-white/30 relative overflow-hidden"
+          className="bg-gradient-to-r from-orange-500 via-amber-500 to-red-500 px-4 py-2 md:px-6 md:py-3 rounded-xl border-2 border-white/30 relative overflow-hidden"
           style={{
             boxShadow: 'none',
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
-          <p className="text-white text-lg md:text-xl lg:text-2xl font-extrabold text-center tracking-wide relative z-10"
+          <p className="text-white text-sm md:text-base lg:text-lg font-extrabold text-center tracking-wide relative z-10"
             style={{
               letterSpacing: '0.1em',
             }}>

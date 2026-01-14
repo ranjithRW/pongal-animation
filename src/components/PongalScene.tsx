@@ -19,7 +19,7 @@ export default function PongalScene() {
       {/* soft radial glow behind the models for a more cinematic Apple-like feel */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(248,250,252,0.12)_0,_transparent_60%)]" />
 
-      <Canvas shadows dpr={[1, 2]}>
+      <Canvas shadows dpr={[0.75, 1]}>
         <PerspectiveCamera makeDefault position={[0, 2, 8]} fov={50} />
 
         {/* subtle atmospheric fog for more depth and realism */}
@@ -32,7 +32,7 @@ export default function PongalScene() {
           penumbra={1}
           intensity={1}
           castShadow
-          shadow-mapSize={[2048, 2048]}
+          shadow-mapSize={[1024, 1024]}
         />
         <spotLight
           position={[-10, 10, -10]}
@@ -45,7 +45,7 @@ export default function PongalScene() {
           position={[5, 5, 5]}
           intensity={0.8}
           castShadow
-          shadow-mapSize={[1024, 1024]}
+          shadow-mapSize={[512, 512]}
         />
         <pointLight position={[-10, -10, -10]} intensity={0.3} />
 
@@ -59,11 +59,11 @@ export default function PongalScene() {
           <ContactShadows
             position={[0, -1.5, 0]}
             opacity={0.65}
-            scale={12}
-            blur={2.4}
+            scale={10}
+            blur={2}
             far={5}
           />
-          <Environment preset="sunset" background blur={0.8} />
+          <Environment preset="sunset" background blur={0.6} />
         </Suspense>
       </Canvas>
     </div>
