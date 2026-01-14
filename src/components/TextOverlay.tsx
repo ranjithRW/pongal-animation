@@ -300,7 +300,7 @@ export default function TextOverlay() {
               Greetings! 👋
             </h3>
             <p className="text-gray-800 text-sm md:text-base leading-relaxed font-medium">
-              I'm <span className="font-bold text-orange-600">Obito Uchiha</span>, and I'm thrilled to share this special Pongal celebration with you!
+              I'm <span className="font-bold text-orange-600">Obito</span>, and I'm thrilled to share this special Pongal celebration with you!
             </p>
           </div>
         </div>
