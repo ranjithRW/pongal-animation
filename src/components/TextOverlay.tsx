@@ -10,6 +10,8 @@ export default function TextOverlay() {
   const section2Ref = useRef<HTMLDivElement>(null);
   const section3Ref = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLImageElement>(null);
+  const scrollHintRef = useRef<HTMLDivElement>(null);
+  const scrollArrowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Enhanced title animation with word-by-word reveal
@@ -64,6 +66,32 @@ export default function TextOverlay() {
         ease: 'sine.inOut',
         repeat: -1,
         yoyo: true,
+      });
+    }
+
+    // Scroll hint and arrow - hide when scrolling starts
+    if (scrollHintRef.current && scrollArrowRef.current) {
+      // Animate arrow bouncing
+      gsap.to(scrollArrowRef.current, {
+        y: 10,
+        duration: 1.5,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+      });
+
+      // Hide both when scrolling starts
+      gsap.to([scrollHintRef.current, scrollArrowRef.current], {
+        opacity: 0,
+        y: -20,
+        duration: 0.5,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '#scroll-container',
+          start: 'top top',
+          end: '2% top',
+          scrub: true,
+        },
       });
     }
 
@@ -284,6 +312,38 @@ export default function TextOverlay() {
             filter: 'drop-shadow(0 0 20px rgba(251, 146, 60, 0.4))',
           }}
         />
+      </div>
+
+      {/* Scroll hint text and arrow - top center, initially visible */}
+      <div
+        ref={scrollHintRef}
+        className="absolute top-20 md:top-24 left-1/2 transform -translate-x-1/2 z-30 text-center"
+      >
+        <p className="text-white text-sm md:text-base font-medium mb-3 drop-shadow-lg"
+          style={{
+            textShadow: '0 2px 10px rgba(0,0,0,0.5)',
+          }}>
+          Scroll to explore
+        </p>
+      </div>
+      <div
+        ref={scrollArrowRef}
+        className="absolute top-32 md:top-36 left-1/2 transform -translate-x-1/2 z-30"
+      >
+        <svg
+          className="w-6 h-6 md:w-8 md:h-8 text-white opacity-80 drop-shadow-lg"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          style={{
+            filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.5))',
+          }}
+        >
+          <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
       </div>
 
       <div

@@ -74,20 +74,6 @@ function App() {
       >
         <PongalScene />
         <TextOverlay />
-
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-          <svg
-            className="w-8 h-8 text-white opacity-70"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
-        </div>
       </div>
 
       <section className="relative h-screen bg-gradient-to-b from-orange-600 via-red-700 to-slate-950 flex items-center justify-center overflow-hidden">
