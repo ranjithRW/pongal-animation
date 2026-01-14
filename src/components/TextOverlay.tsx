@@ -317,9 +317,9 @@ export default function TextOverlay() {
       {/* Scroll hint text and arrow - top center, initially visible */}
       <div
         ref={scrollHintRef}
-        className="absolute top-20 md:top-24 left-1/2 transform -translate-x-1/2 z-30 text-center"
+        className="absolute top-4 md:top-6 left-1/2 transform -translate-x-1/2 z-30 text-center"
       >
-        <p className="text-white text-sm md:text-base font-medium mb-3 drop-shadow-lg"
+        <p className="text-white text-sm md:text-base font-medium mb-2 drop-shadow-lg"
           style={{
             textShadow: '0 2px 10px rgba(0,0,0,0.5)',
           }}>
@@ -328,7 +328,7 @@ export default function TextOverlay() {
       </div>
       <div
         ref={scrollArrowRef}
-        className="absolute top-32 md:top-36 left-1/2 transform -translate-x-1/2 z-30"
+        className="absolute top-12 md:top-14 left-1/2 transform -translate-x-1/2 z-30"
       >
         <svg
           className="w-6 h-6 md:w-8 md:h-8 text-white opacity-80 drop-shadow-lg"
