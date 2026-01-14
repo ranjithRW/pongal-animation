@@ -222,7 +222,6 @@ export default function TextOverlay() {
       // Continuous pulse animation
       gsap.to(section3Ref.current, {
         scale: 1.05,
-        boxShadow: '0 0 40px rgba(251, 146, 60, 0.6)',
         duration: 2,
         ease: 'sine.inOut',
         repeat: -1,
@@ -250,19 +249,23 @@ export default function TextOverlay() {
         }}
       />
 
-      <div className="absolute top-16 left-1/2 transform -translate-x-1/2 text-center px-4 z-20">
+      <div className="absolute top-12 left-1/2 transform -translate-x-1/2 text-center px-4 z-20">
         <h1
           ref={titleRef}
-          className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-4 inline-block"
+          className="text-5xl font-extrabold tracking-tight px-2 pt-2 pb-4 inline-block"
           style={{ 
             perspective: '1000px',
             transformStyle: 'preserve-3d',
+            lineHeight: '1.2',
+            overflow: 'visible',
           }}
         >
           <span className="word inline-block text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-orange-400 to-rose-400 drop-shadow-2xl mr-2" 
             style={{ 
               textShadow: '0 0 30px rgba(251, 146, 60, 0.5), 0 0 60px rgba(251, 146, 60, 0.3)',
               filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.4))',
+              overflow: 'visible',
+              lineHeight: '1.2',
             }}>
             Happy
           </span>
@@ -270,6 +273,8 @@ export default function TextOverlay() {
             style={{ 
               textShadow: '0 0 30px rgba(249, 115, 22, 0.5), 0 0 60px rgba(249, 115, 22, 0.3)',
               filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.4))',
+              overflow: 'visible',
+              lineHeight: '1.2',
             }}>
             Pongal
           </span>
@@ -333,15 +338,16 @@ export default function TextOverlay() {
         className="absolute bottom-16 md:bottom-20 left-1/2 transform -translate-x-1/2 opacity-0"
       >
         <div 
-          className="bg-gradient-to-r from-orange-500 via-amber-500 to-red-500 px-10 py-5 md:px-12 md:py-6 rounded-3xl shadow-2xl border-2 border-white/30 relative overflow-hidden"
+          className="bg-gradient-to-r from-orange-500 via-amber-500 to-red-500 px-10 py-5 md:px-12 md:py-6 rounded-3xl border-2 border-white/30 relative overflow-hidden"
           style={{
-            boxShadow: '0 0 40px rgba(251, 146, 60, 0.6), 0 0 80px rgba(251, 146, 60, 0.4), inset 0 1px 0 rgba(255,255,255,0.3)',
+            boxShadow: 'none',
+            filter: 'drop-shadow(0 0 40px rgba(251, 146, 60, 0.6)) drop-shadow(0 0 80px rgba(251, 146, 60, 0.4))',
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
           <p className="text-white text-2xl md:text-3xl lg:text-4xl font-extrabold text-center tracking-wide relative z-10"
             style={{
-              textShadow: '0 2px 10px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.3)',
+              textShadow: '0 0 20px rgba(255,255,255,0.3)',
               letterSpacing: '0.1em',
             }}>
             பொங்கலோ பொங்கல் 2026!
