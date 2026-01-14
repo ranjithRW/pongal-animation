@@ -193,23 +193,17 @@ export default function TextOverlay() {
       });
     }
 
-    // Section 3 - Enhanced with pulse and glow effect
+    // Section 3 - Simple fade in (no pulse or glow animation)
     if (section3Ref.current) {
       gsap.fromTo(
         section3Ref.current,
         { 
           opacity: 0, 
-          scale: 0.3,
-          y: 50,
-          filter: 'blur(15px) brightness(0.5)',
         },
         {
           opacity: 1,
-          scale: 1,
-          y: 0,
-          filter: 'blur(0px) brightness(1)',
-          duration: 1.8,
-          ease: 'back.out(1.2)',
+          duration: 1,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: '#scroll-container',
             start: '75% center',
@@ -218,9 +212,8 @@ export default function TextOverlay() {
           },
         }
       );
-
-      // Continuous pulse animation
-      gsap.to(section3Ref.current, {
+       // Continuous pulse animation
+       gsap.to(section3Ref.current, {
         scale: 1.05,
         duration: 2,
         ease: 'sine.inOut',
@@ -338,16 +331,14 @@ export default function TextOverlay() {
         className="absolute bottom-16 md:bottom-20 left-1/2 transform -translate-x-1/2 opacity-0"
       >
         <div 
-          className="bg-gradient-to-r from-orange-500 via-amber-500 to-red-500 px-10 py-5 md:px-12 md:py-6 rounded-3xl border-2 border-white/30 relative overflow-hidden"
+          className="bg-gradient-to-r from-orange-500 via-amber-500 to-red-500 px-6 py-3 md:px-8 md:py-4 rounded-2xl border-2 border-white/30 relative overflow-hidden"
           style={{
             boxShadow: 'none',
-            filter: 'drop-shadow(0 0 40px rgba(251, 146, 60, 0.6)) drop-shadow(0 0 80px rgba(251, 146, 60, 0.4))',
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
-          <p className="text-white text-2xl md:text-3xl lg:text-4xl font-extrabold text-center tracking-wide relative z-10"
+          <p className="text-white text-lg md:text-xl lg:text-2xl font-extrabold text-center tracking-wide relative z-10"
             style={{
-              textShadow: '0 0 20px rgba(255,255,255,0.3)',
               letterSpacing: '0.1em',
             }}>
             பொங்கலோ பொங்கல் 2026!
