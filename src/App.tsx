@@ -96,14 +96,10 @@ function App() {
         {/* GIF on the right side, styled to blend with background */}
         <div className="absolute right-4 md:right-8 lg:right-12 top-1/2 transform -translate-y-1/2 w-1/4 md:w-1/5 lg:w-1/6 h-auto max-h-[70vh] flex items-center justify-center z-10">
           <div className="relative w-full h-auto">
-            {/* Gradient overlay to blend with warm background */}
-            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-orange-950/20 to-red-950/30 pointer-events-none rounded-2xl" />
-            {/* Warm glow effect matching the section background */}
-            <div className="absolute inset-0 bg-gradient-radial from-orange-400/15 via-transparent to-transparent pointer-events-none rounded-2xl" />
             <img
-              src="/pp.gif"
+              src="/Thai-Pongal.png"
               alt="Pongal celebration"
-              className="w-full h-auto object-contain rounded-2xl shadow-2xl relative z-10"
+              className="w-full h-auto object-contain relative z-10"
               style={{
                 filter: 'drop-shadow(0 0 30px rgba(251, 146, 60, 0.3)) drop-shadow(0 0 60px rgba(239, 68, 68, 0.15)) brightness(1.1) contrast(1.05) saturate(1.15)',
                 mixBlendMode: 'normal',
